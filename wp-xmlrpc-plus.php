@@ -59,10 +59,10 @@ function wp_xmlrpc_plus_get_modified_posts($args) {
 		foreach ($posts_list as $entry) {
 			if ( !current_user_can( 'edit_post', $entry['ID'] ) ) continue;
 		
-			$posts_modified_date = mysql2date('Ymd\TH:i:s', $entry['post_modified'], false);
+			$posts_modified_date = new IXR_Date(mysql2date('Ymd\TH:i:s', $entry['post_modified'], false));
 			if ( $posts_modified_date < $modifiedDate) continue;
 			$struct[] = array(
-				'dateModified' => new IXR_Date($posts_modified_date),
+				'dateModified' => $posts_modified_date,
 				'postid' => (string) $entry['ID'],
 			);
 		}
